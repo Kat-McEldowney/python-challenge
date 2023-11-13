@@ -13,7 +13,6 @@ best_gain = 0
 worst_day = " "
 worst_loss = 0
 previous_month = 0
-current_month = 0
 change = 0.0
 
 
