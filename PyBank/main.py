@@ -7,8 +7,7 @@ pybank_csv = os.path.join('.', 'Resources', 'budget_data.csv')
 # initalize the variables
 total_months = 0
 net_total = 0
-profit_counter = 0
-loss_counter = 0
+change_tracker = 0
 best_day = " "
 best_gain = 0
 worst_day = " "
@@ -42,7 +41,7 @@ with open(pybank_csv, 'r') as csvfile:
             previous_month = row[1]
         elif row[1] > previous_month:
             change = row[1] - previous_month
-            profit_counter += change
+            change_tracker += change
             previous_month = row[1]
             
             if change > best_gain:
@@ -51,7 +50,7 @@ with open(pybank_csv, 'r') as csvfile:
         
         elif row[1] < previous_month:
             change = previous_month - row[1]
-            loss_counter += change
+            change_tracker -= change
             previous_month = row[1]
             
             if change > worst_loss:
@@ -60,7 +59,7 @@ with open(pybank_csv, 'r') as csvfile:
                 
         
 
-average_change = round((profit_counter - loss_counter) / (total_months - 1), 2)
+average_change = round(change_tracker / (total_months - 1), 2)
 
 
 results= (f"Financial Analysis \n------------------------- \nTotal Months: {total_months} \nTotal: ${net_total} \nAverage Change: ${average_change} \nGreatest Increase in Profits: {best_day} (${best_gain}) \nGreatest Decrease in Profits: {worst_day} ($-{worst_loss})")
